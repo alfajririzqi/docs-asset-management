@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Asset Management Changelog - Latest feature releases, product improvements and bug fixes">
+    <title>Changelog - Asset Management</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="icon/logo.png">
+    
+    <!-- Modular CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- External Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Changelog Specific Styles */
+        .changelog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .changelog-header {
+            margin-bottom: 4rem;
+        }
+        
+        .changelog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .changelog-header p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .changelog-timeline {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .changelog-date {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            position: sticky;
+            top: 80px;
+        }
+        
+        .changelog-item {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        [data-theme="dark"] .changelog-item {
+            background: rgba(20, 20, 24, 0.5);
+            border-color: rgba(60, 56, 70, 0.6);
+        }
+        
+        .changelog-version {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .changelog-version h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .version-badge {
+            display: inline-block;
+            padding: 0.25rem 0.625rem;
+            background: #000000;
+            color: white;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        
+        [data-theme="dark"] .version-badge {
+            background: rgba(139, 92, 246, 0.7);
+        }
+        
+        .changelog-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .changelog-tag {
+            padding: 0.25rem 0.75rem;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .tag-feature { background: rgba(16, 185, 129, 0.15); color: #10B981; }
+        .tag-fix { background: rgba(239, 68, 68, 0.15); color: #EF4444; }
+        .tag-change { background: rgba(59, 130, 246, 0.15); color: #3B82F6; }
+        .tag-remove { background: rgba(245, 158, 11, 0.15); color: #F59E0B; }
+        
+        .changelog-focus {
+            padding: 1rem;
+            background: rgba(139, 92, 246, 0.08);
+            border-left: 3px solid #000000;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+        
+        [data-theme="dark"] .changelog-focus {
+            border-left-color: rgba(139, 92, 246, 0.9);
+        }
+        
+        .changelog-focus strong {
+            color: var(--text-primary);
+        }
+        
+        .changelog-content {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+        
+        .changelog-content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .changelog-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .changelog-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .changelog-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .changelog-content code {
+            background: #0A0A0A;
+            color: #E5E7EB;
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.875em;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+            color: rgba(0, 0, 0, 0.75);
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .back-link:hover {
+            color: rgba(0, 0, 0, 1);
+        }
+        
+        [data-theme="dark"] .back-link {
+            background: rgba(20, 20, 24, 0.5);
+            border-color: rgba(60, 56, 70, 0.6);
+            color: rgba(255, 255, 255, 0.75);
+        }
+        
+        [data-theme="dark"] .back-link:hover {
+            color: rgba(255, 255, 255, 1);
+        }
+        
+        @media (max-width: 768px) {
+            .changelog-timeline {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .changelog-date {
+                position: relative;
+                top: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="icon/logo.png" alt="Asset Management Logo" class="logo-icon">
+                    <span>Asset Management Docs</span>
+                </a>
+            </div>
+            <div class="header-right">
+                <div class="theme-toggle-wrapper">
+                    <input type="checkbox" id="themeToggle" class="theme-toggle-input">
+                    <label for="themeToggle" class="theme-toggle-slider">
+                        <span class="theme-toggle-icon"></span>
+                    </label>
+                </div>
+                <a href="https://github.com/alfajririzqi/asset_management" target="_blank" class="github-link" aria-label="GitHub Repository">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Changelog Content -->
+    <div class="changelog-container" style="margin-top: 60px;">
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Documentation
+        </a>
+        
+        <div class="changelog-header">
+            <h1>Changelog</h1>
+            <p>See the latest feature releases, product improvements and bug fixes.</p>
+        </div>
+
+        <!-- Version 1.2.1 -->
+        <div class="changelog-timeline">
+            <div class="changelog-date">November 23, 2025</div>
+            <div>
+                <div class="changelog-item">
+                    <div class="changelog-version">
+                        <h2>Version 1.2.1</h2>
+                        <span class="version-badge">Latest</span>
+                    </div>
+                    <div class="changelog-tags">
+                        <span class="changelog-tag tag-feature">Added</span>
+                        <span class="changelog-tag tag-change">Changed</span>
+                        <span class="changelog-tag tag-fix">Fixed</span>
+                    </div>
+            
+            <div class="changelog-focus">
+                <strong>🎯 Focus:</strong> Operation Scope Refinement - Ensuring all file operations target only the current blend file, not external linked libraries.
+            </div>
+            
+            <div class="changelog-content">
+                <h3>✨ Added</h3>
+                <ul>
+                    <li><strong>Consolidate Textures - Enhanced Conflict Detection:</strong>
+                        <ul>
+                            <li>Smart file comparison - Detects identical files using modification time + file size matching</li>
+                            <li>Batch conflict resolution - Single action applies to all conflicts (Relink/Overwrite/Skip modes)</li>
+                            <li>Optional unpacking - Toggle to unpack embedded textures to textures/ folder during consolidate</li>
+                            <li>Simplified UI - Removed per-file action buttons, streamlined to batch operation</li>
+                        </ul>
+                    </li>
+                    <li><strong>Publish Dialog Improvements:</strong>
+                        <ul>
+                            <li>Limited library list - Shows max 4 linked libraries (was 10), rest shown as "... and X more"</li>
+                            <li>Consistent target folder - Shows parent folder name for include libraries</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>🔧 Changed</h3>
+                <ul>
+                    <li><strong>Operation Scope - Current Blend Only:</strong>
+                        <ul>
+                            <li>File Management panel - All texture statistics now ignore external linked images</li>
+                            <li>Consolidate textures - Only processes current file textures, skips library images</li>
+                            <li>Cleanup unused textures - Only checks current file usage, preserves library textures</li>
+                        </ul>
+                    </li>
+                    <li><strong>Publishing System:</strong>
+                        <ul>
+                            <li>Removed auto-unpack feature - Packed textures now remain embedded during publish</li>
+                            <li>Added asset folder level - Single publish now creates <code>publish/AssetName/AssetName.blend</code> structure</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>🐛 Fixed</h3>
+                <ul>
+                    <li><strong>Batch Rename - Suffix Placement:</strong> Fixed suffix placement to be before file extension (e.g., <code>char_BaseColor_4k.png</code> instead of <code>char_BaseColor.png_4k</code>)</li>
+                    <li><strong>Consolidate Textures - Conflict Detection:</strong> Added file conflict detection to prevent unnecessary overwrites using modification time + size comparison</li>
+                    <li><strong>Publish System - Recursive Texture Scanning:</strong> Fixed texture folder scanning to support nested subfolders, preserves subfolder structure during publish</li>
+                </ul>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Version 1.2.0 -->
+        <div class="changelog-timeline">
+            <div class="changelog-date">November 20, 2025</div>
+            <div>
+                <div class="changelog-item">
+                    <div class="changelog-version">
+                        <h2>Version 1.2.0</h2>
+                    </div>
+                    <div class="changelog-tags">
+                        <span class="changelog-tag tag-feature">Major Features</span>
+                        <span class="changelog-tag tag-change">UI/UX</span>
+                    </div>
+            
+            <div class="changelog-content">
+                <h3>🎯 Major Features</h3>
+                
+                <h4>Published File Auto-Detection System</h4>
+                <ul>
+                    <li><strong>Auto-detection on file open</strong> - No manual validation needed, instant detection when opening any .blend file</li>
+                    <li><strong>4-layer detection algorithm:</strong>
+                        <ul>
+                            <li>File Pattern: Detects <code>AssetName_v###.blend</code> naming convention</li>
+                            <li>Folder Pattern: Detects <code>AssetName_v###/</code> directory structure</li>
+                            <li>Log Parsing: Reads <code>.publish_activity.log</code> in publish path</li>
+                            <li>Recursive Search: Scans up to 5 parent directories for publish logs</li>
+                        </ul>
+                    </li>
+                    <li><strong>Performance-optimized caching</strong> - Prevents repeated I/O operations on panel redraws</li>
+                </ul>
+
+                <h4>Published Library Detection</h4>
+                <ul>
+                    <li>Validates linked libraries during pre-publish check</li>
+                    <li>Recursive log parsing - Searches library source paths in publish activity logs</li>
+                    <li>Error reporting - Shows which linked libraries are published files</li>
+                    <li>Source path extraction - Displays original source file location</li>
+                </ul>
+
+                <h4>Enhanced UI/UX</h4>
+                <ul>
+                    <li><strong>Clickable Source Paths:</strong> All 5 panels now show clickable source file paths with copy to clipboard</li>
+                    <li><strong>Inline Warnings:</strong> Non-intrusive alerts without blocking entire UI</li>
+                    <li><strong>Disable operations:</strong> Buttons automatically disabled when published file detected</li>
+                </ul>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Version 1.0.0 -->
+        <div class="changelog-timeline">
+            <div class="changelog-date">November 17, 2025</div>
+            <div>
+                <div class="changelog-item">
+                    <div class="changelog-version">
+                        <h2>Version 1.0.0</h2>
+                    </div>
+                    <div class="changelog-tags">
+                        <span class="changelog-tag tag-feature">Initial Release</span>
+                    </div>
+            
+            <div class="changelog-content">
+                <h3>🎯 Initial Release</h3>
+                <p>Complete asset management system for Blender 4.0+ with professional publishing workflow, texture optimization, and version control.</p>
+
+                <h3>✨ Features</h3>
+                
+                <h4>Publishing System</h4>
+                <ul>
+                    <li>Pre-publish validation - Checks texture folder, missing textures, external files, orphan data</li>
+                    <li>Force Publish mode - Bypass warnings (critical errors still block)</li>
+                    <li>Automatic versioning - Incremental numbering (v001, v002, v003...)</li>
+                    <li>Overwrite mode - Replace existing published file</li>
+                    <li>Clean delivery structure - Organized folder hierarchy</li>
+                    <li>Centralized logging - <code>.publish_activity.log</code> in publish root</li>
+                    <li>Linked library support - Include/exclude libraries in publish</li>
+                </ul>
+
+                <h4>Scene Analysis & Statistics</h4>
+                <ul>
+                    <li>Real-time metrics - Object, material, texture counts</li>
+                    <li>Library tracking - Linked objects and node groups</li>
+                    <li>Deep scene analysis - Multi-threaded scanning with progress bar</li>
+                    <li>Report generation: Material Usage, Texture Usage, Texture Paths</li>
+                </ul>
+
+                <h4>Texture Optimization Tools</h4>
+                <ul>
+                    <li><strong>Resolution Management:</strong> Downgrade (4K → 2K → 1K → 512px) and restore resolution</li>
+                    <li><strong>Format Conversion:</strong> PNG ↔ JPEG conversion with quality settings</li>
+                    <li><strong>Optimization:</strong> Consolidate duplicates, cleanup unused textures</li>
+                </ul>
+
+                <h4>Versioning System</h4>
+                <ul>
+                    <li>Auto-increment - Automatic version numbering</li>
+                    <li>Version descriptions - Add notes to each version</li>
+                    <li>Restore system - Revert to any previous version</li>
+                    <li>Safety checks - Prevents versioning on unsaved files</li>
+                </ul>
+
+                <h4>Batch Rename Tools</h4>
+                <ul>
+                    <li>Find & Replace - Multiple search-replace rules</li>
+                    <li>Prefix/Suffix - Add consistent naming</li>
+                    <li>Auto-Correct Maps - Smart texture type detection</li>
+                    <li>Pattern Support - Flexible naming conventions</li>
+                </ul>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <p>&copy; 2025 Asset Management. GPL-3.0 License.</p>
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/alfajririzqi/asset_management" target="_blank">GitHub</a>
+                <a href="https://github.com/alfajririzqi/asset_management/releases" target="_blank">Releases</a>
+                <a href="https://github.com/alfajririzqi/asset_management/issues" target="_blank">Issues</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>

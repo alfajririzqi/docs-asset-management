@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive Asset Management documentation for Blender - Professional asset publishing and texture tools">
+    <title>Asset Management Documentation</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="icon/logo.png">
+    
+    <!-- Critical Inline CSS for Preloader (ensures immediate display) -->
+    <style>
+        #preloader{position:fixed;inset:0;width:100%;height:100%;background-color:#fefcff;background-image:radial-gradient(circle at 30% 70%,rgba(173,216,230,.35),transparent 70%),radial-gradient(circle at 70% 30%,rgba(255,182,193,.4),transparent 60%);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .2s ease-in-out}#preloader.hidden{opacity:0;pointer-events:none;visibility:hidden}.three-body{--uib-size:35px;--uib-speed:.8s;--uib-color:#3498db;position:relative;display:inline-block;height:var(--uib-size);width:var(--uib-size);animation:spin78236 calc(var(--uib-speed) * 1.5) infinite linear}.three-body__dot{position:absolute;height:100%;width:30%}.three-body__dot:after{content:'';position:absolute;width:100%;padding-bottom:100%;background-color:var(--uib-color);border-radius:50%}.three-body__dot:nth-child(1){bottom:5%;left:0;transform:rotate(60deg);transform-origin:50% 85%}.three-body__dot:nth-child(1)::after{bottom:0;animation:wobble1 var(--uib-speed) infinite ease-in-out;animation-delay:calc(var(--uib-speed) * -.3)}.three-body__dot:nth-child(2){bottom:5%;right:0;transform:rotate(-60deg);transform-origin:50% 85%}.three-body__dot:nth-child(2)::after{bottom:0;animation:wobble1 var(--uib-speed) infinite calc(var(--uib-speed) * -.15) ease-in-out}.three-body__dot:nth-child(3){bottom:-5%;left:0;transform:translateX(116.666%)}.three-body__dot:nth-child(3)::after{top:0;animation:wobble2 var(--uib-speed) infinite ease-in-out}@keyframes spin78236{to{transform:rotate(360deg)}}@keyframes wobble1{0%,100%{transform:translateY(0%) scale(1);opacity:1}50%{transform:translateY(-66%) scale(.65);opacity:.8}}@keyframes wobble2{0%,100%{transform:translateY(0%) scale(1);opacity:1}50%{transform:translateY(66%) scale(.65);opacity:.8}}
+    </style>
+    
+    <!-- Modular CSS (5 Files) -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- External Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- ==================== -->
+    <!-- PRELOADER -->
+    <!-- ==================== -->
+    <div id="preloader">
+        <div class="three-body">
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
+        </div>
+    </div>
+
+    <!-- ==================== -->
+    <!-- DOCUMENTATION PAGE -->
+    <!-- ==================== -->
+    <div id="documentation" class="page active">
+        
+        <!-- ==================== -->
+        <!-- HEADER (Fixed Top) -->
+        <!-- ==================== -->
+        <header class="header">
+            <div class="header-container">
+                <div class="header-left">
+                    <label class="sidebar-toggle" for="sidebarToggle">
+                        <input type="checkbox" id="sidebarToggle" />
+                        <svg viewBox="0 0 32 32">
+                            <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+                            <path class="line" d="M7 16 27 16"></path>
+                        </svg>
+                    </label>
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')" class="logo">
+                        <img src="icon/logo.png" alt="Asset Management Logo" class="logo-icon">
+                        <span>Asset Management Docs</span>
+                    </a>
+                    <a href="changelog.html" class="changelog-link">Changelog</a>
+                </div>
+                <div class="header-right">
+                    <label class="theme-toggle-wrapper">
+                        <input class="theme-toggle-input" id="themeToggle" type="checkbox" aria-label="Toggle dark mode" />
+                        <div class="theme-toggle-slider"></div>
+                    </label>
+                    <a href="https://github.com/alfajririzqi/asset_management" target="_blank" class="github-link" title="View on GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- ==================== -->
+        <!-- MAIN LAYOUT (3-Column Grid) -->
+        <!-- ==================== -->
+        <div class="main-layout">
+            
+            <!-- ==================== -->
+            <!-- SIDEBAR (Left Column) -->
+            <!-- ==================== -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-content">
+                    <!-- Search Bar -->
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="search" id="searchInput" placeholder="Search..." class="search-input" />
+                            <svg class="search-icon" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <nav class="sidebar-nav">
+                        <div class="nav-section">
+                            <h3 class="nav-section-title">Getting Started</h3>
+                            <ul class="nav-list">
+                                <li><a href="javascript:void(0)" onclick="navigateTo('introduction')" class="nav-link" data-section="introduction">Introduction</a></li>
+                                <li><a href="javascript:void(0)" onclick="navigateTo('installation')" class="nav-link" data-section="installation">Installation</a></li>
+                                <li><a href="javascript:void(0)" onclick="navigateTo('quick-start')" class="nav-link" data-section="quick-start">Quick Start</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h3 class="nav-section-title">Core Features</h3>
+                            <ul class="nav-list">
+                                <li><a href="javascript:void(0)" onclick="navigateTo('publishing')" class="nav-link" data-section="publishing">Publishing System</a></li>
+                                <li><a href="javascript:void(0)" onclick="navigateTo('texture-tools')" class="nav-link" data-section="texture-tools">Texture Tools</a></li>
+                                <li><a href="javascript:void(0)" onclick="navigateTo('versioning')" class="nav-link" data-section="versioning">Version Control</a></li>
+                                <li><a href="javascript:void(0)" onclick="navigateTo('file-protection')" class="nav-link" data-section="file-protection">File Protection</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h3 class="nav-section-title">Optimization Tools</h3>
+                            <ul class="nav-list">
+                                <li><a href="javascript:void(0)" onclick="navigateTo('asset-optimization')" class="nav-link" data-section="asset-optimization">Asset Optimization</a></li>
+                                <li><a href="javascript:void(0)" onclick="navigateTo('duplicate-finder')" class="nav-link" data-section="duplicate-finder">Duplicate Materials & Textures</a></li>
+                                <li><a href="javascript:void(0)" onclick="navigateTo('high-poly-check')" class="nav-link" data-section="high-poly-check">High Poly Analysis</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h3 class="nav-section-title">Advanced</h3>
+                            <ul class="nav-list">
+                                <li><a href="javascript:void(0)" onclick="navigateTo('scene-analysis')" class="nav-link" data-section="scene-analysis">Scene Analysis</a></li>
+                                <li><a href="javascript:void(0)" onclick="navigateTo('batch-operations')" class="nav-link" data-section="batch-operations">Batch Operations</a></li>
+                                <li><a href="javascript:void(0)" onclick="navigateTo('linked-libraries')" class="nav-link" data-section="linked-libraries">Linked Libraries</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h3 class="nav-section-title">Help</h3>
+                            <ul class="nav-list">
+                                <li><a href="javascript:void(0)" onclick="navigateTo('faq')" class="nav-link" data-section="faq">FAQ</a></li>
+                                <li><a href="javascript:void(0)" onclick="navigateTo('troubleshooting')" class="nav-link" data-section="troubleshooting">Troubleshooting</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- ==================== -->
+            <!-- MAIN CONTENT (Center Column) -->
+            <!-- ==================== -->
+            <main class="content" id="mainContent">
+                <div class="content-wrapper">
+                    <!-- Content sections will be loaded here dynamically -->
+                    <noscript>
+                        <section class="doc-section">
+                            <h1>Enable JavaScript</h1>
+                            <p>This documentation site requires JavaScript to load content. Please enable JavaScript in your browser.</p>
+                        </section>
+                    </noscript>
+                </div>
+            </main>
+
+            <!-- ==================== -->
+            <!-- TABLE OF CONTENTS (Right Column) -->
+            <!-- ==================== -->
+            <aside class="toc">
+                <div class="toc-content">
+                    <h4>On this page</h4>
+                    <nav class="toc-nav" id="tocNav">
+                        <!-- Will be populated by JavaScript -->
+                    </nav>
+                </div>
+            </aside>
+        </div>
+
+        <!-- ==================== -->
+        <!-- FOOTER (Full Width) -->
+        <!-- ==================== -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-left">
+                    <span>Asset Management</span>
+                    <span>·</span>
+                    <span>© 2025 All rights reserved</span>
+                </div>
+                <div class="footer-right">
+                    <a href="https://github.com/alfajririzqi/asset_management/blob/main/LICENSE" target="_blank">GPL-3.0 License</a>
+                    <span>·</span>
+                    <span>Made with <i class="fas fa-heart"></i> by <a href="https://github.com/alfajririzqi" target="_blank">Rizqi Alfajri</a></span>
+                    <span>·</span>
+                    <ul class="social-icons">
+                        <li class="icon-content">
+                            <a data-social="whatsapp" aria-label="WhatsApp" href="https://wa.me/6289513170863" target="_blank">
+                                <div class="filled"></div>
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                                </svg>
+                            </a>
+                            <div class="tooltip">WhatsApp</div>
+                        </li>
+                        <li class="icon-content">
+                            <a data-social="instagram" aria-label="Instagram" href="https://www.instagram.com/rafpictures_id/" target="_blank">
+                                <div class="filled"></div>
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                            </a>
+                            <div class="tooltip">Instagram</div>
+                        </li>
+                        <li class="icon-content">
+                            <a data-social="email" aria-label="Email" href="mailto:alfajririzqi@gmail.com" target="_blank">
+                                <div class="filled"></div>
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </a>
+                            <div class="tooltip">Email</div>
+                        </li>
+                        <li class="icon-content">
+                            <a data-social="youtube" aria-label="YouTube" href="https://www.youtube.com/@rafpictures_studios" target="_blank">
+                                <div class="filled"></div>
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                            </a>
+                            <div class="tooltip">YouTube</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ==================== -->
+    <!-- CONTENT TEMPLATES (Hidden) -->
+    <!-- ==================== -->
+    <div id="content-templates" style="display: none;">
+        <!-- Introduction Section -->
+        <template id="template-introduction">
+            <section id="introduction" class="doc-section">
+                <div class="breadcrumb">
+                    <span>Introduction</span>
+                </div>
+                <h1>Asset Management for Blender</h1>
+                <p class="lead">Professional asset publishing and texture tools designed for production workflows. Streamline your workflow with intelligent validation, texture optimization, and automatic versioning — 100% free and open source.</p>
+                
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <div class="info-card-content">
+                            <h4>Version 1.2.1</h4>
+                            <p>Latest stable release</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="info-card-content">
+                            <h4>Blender 4.0+</h4>
+                            <p>Tested on 4.0 - 4.5.1</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="info-card-content">
+                            <h4>100% Free</h4>
+                            <p>Open source GPL-3.0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>What is Asset Management?</h2>
+                <p>Asset Management is a comprehensive Blender addon designed for production workflows, offering intelligent analysis, automated optimization, and foolproof publishing. Perfect for studios, freelancers, and technical artists who demand reliability and safety.</p>
+
+                <h2>Why Use Asset Management?</h2>
+                <p>Stop wasting time on manual asset publishing and texture cleanup. This addon automates your entire production workflow:</p>
+                <ul>
+                    <li><strong>Prevent Mistakes:</strong> Pre-publish validation catches errors before delivery</li>
+                    <li><strong>Save Time:</strong> One-click publishing with automatic versioning</li>
+                    <li><strong>Optimize Assets:</strong> Smart texture consolidation reduces file sizes</li>
+                    <li><strong>Stay Organized:</strong> Clean folder structure and version tracking</li>
+                    <li><strong>Work Safely:</strong> Published file protection prevents accidental edits</li>
+                </ul>
+
+                <div class="callout callout-info">
+                    <div class="callout-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Perfect for</strong> Freelancers, Asset Creators, Hobbyists, and Small Studios</p>
+                    </div>
+                </div>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('installation')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>Installation Guide <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <!-- Installation Section -->
+        <template id="template-installation">
+            <section id="installation" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>Installation</span>
+                </div>
+                <h1>Installation Guide</h1>
+                <p class="lead">Get started in minutes with these simple steps. Asset Management works on Windows, macOS, and Linux with Blender 4.0 or higher.</p>
+
+                <h2>Prerequisites</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Requirement</th>
+                                <th>Version</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Blender</td>
+                                <td>4.0+</td>
+                                <td>Tested on 4.0 - 4.5.1</td>
+                            </tr>
+                            <tr>
+                                <td>Python</td>
+                                <td>3.10+</td>
+                                <td>Bundled with Blender</td>
+                            </tr>
+                            <tr>
+                                <td>OS</td>
+                                <td>Any</td>
+                                <td>Windows, macOS, Linux</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Installation Steps</h2>
+
+                <div class="steps-container">
+                    <h3>1. Download the Addon</h3>
+                    <p>Download the latest release ZIP file from the GitHub repository.</p>
+                    <div class="code-block">
+                        <code>asset_management-v1.2.1.zip</code>
+                        <button class="copy-btn" data-copy="https://github.com/alfajririzqi/asset_management/releases">
+                            <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+                    <div class="callout callout-tip">
+                        <div class="callout-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="callout-content">
+                            <p>Always download from the official <a href="https://github.com/alfajririzqi/asset_management/releases" target="_blank">GitHub Releases</a> page to ensure you get the latest version.</p>
+                        </div>
+                    </div>
+
+                    <h3>2. Open Blender Preferences</h3>
+                    <p>In Blender, navigate to Edit → Preferences → Add-ons</p>
+                    <div class="callout callout-tip">
+                        <div class="callout-icon">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                        <div class="callout-content">
+                            <p>Keyboard Shortcut: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>U</kbd> (Windows/Linux) or <kbd>Cmd</kbd> + <kbd>,</kbd> (macOS)</p>
+                        </div>
+                    </div>
+
+                    <h3>3. Install the Addon</h3>
+                    <p>Click the "Install..." button, select the downloaded ZIP file, and click "Install Add-on"</p>
+                    <div class="callout callout-warning">
+                        <div class="callout-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="callout-content">
+                            <p><strong>Important:</strong> Do NOT extract the ZIP file. Blender will handle the installation automatically.</p>
+                        </div>
+                    </div>
+
+                    <h3>4. Enable the Addon</h3>
+                    <p>Search for "Asset Management" in the add-ons list and enable the checkbox next to it.</p>
+                    <div class="callout callout-success">
+                        <div class="callout-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="callout-content">
+                            <p>Addon is now ready! Access it from the N-panel → Asset Management tab</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Introduction</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('quick-start')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>Quick Start <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <!-- Quick Start Section -->
+        <template id="template-quick-start">
+            <section id="quick-start" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>Quick Start</span>
+                </div>
+                <h1>Quick Start Guide</h1>
+                <p class="lead">Learn the basics and start publishing assets in under 5 minutes.</p>
+
+                <h2>First-Time Setup</h2>
+                <p>Before publishing your first asset, you need to configure the addon:</p>
+
+                <h3>1. Set Publish Path</h3>
+                <p>Navigate to the Publishing Panel in the N-panel and click "Publish Path" to choose your output directory.</p>
+                <div class="code-block">
+                    <code>Example: D:/Projects/Published_Assets/</code>
+                </div>
+
+                <h3>2. Organize Asset Structure</h3>
+                <p>Your working files should follow this structure for optimal results:</p>
+                <div class="code-block">
+<code>Chair/
+├── Chair.blend
+└── textures/          ← Important: textures must be in this folder
+    ├── BaseColor.png
+    ├── Normal.png
+    └── Roughness.png</code>
+                </div>
+                <div class="callout callout-warning">
+                    <div class="callout-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Important:</strong> Textures must be in a folder named "textures" for proper publishing.</p>
+                    </div>
+                </div>
+
+                <h2>Publishing Workflow</h2>
+                
+                <div class="steps-container">
+                    <h3>1. Validate</h3>
+                    <p>Click <strong>"Check Publish Readiness"</strong> to run pre-publish validation checks.</p>
+
+                    <h3>2. Review Results</h3>
+                    <ul>
+                        <li><span class="badge badge-success">Green</span> Ready to publish - all checks passed</li>
+                        <li><span class="badge badge-warning">Yellow</span> Can be force-published - non-critical issues</li>
+                        <li><span class="badge badge-error">Red</span> Must fix - critical issues that block publishing</li>
+                    </ul>
+
+                    <h3>3. Choose Publishing Mode</h3>
+                    <ul>
+                        <li><strong>Overwrite Mode:</strong> Always replaces existing file (good for updates)</li>
+                        <li><strong>Versioning Mode:</strong> Creates incremental versions (v001, v002...)</li>
+                    </ul>
+
+                    <h3>4. Publish</h3>
+                    <p>Click <strong>"Publish Asset"</strong> or enable <strong>"Force Publish"</strong> to bypass warnings.</p>
+                </div>
+
+                <h2>Output Examples</h2>
+                <h3>Overwrite Mode</h3>
+                <div class="code-block">
+<code>PublishPath/Chair/
+├── Chair.blend         ← Always updated (same filename)
+└── textures/
+    ├── BaseColor.png
+    └── Normal.png</code>
+                </div>
+
+                <h3>Versioning Mode</h3>
+                <div class="code-block">
+<code>PublishPath/Chair/
+├── Chair_v001.blend    ← Version 1
+├── Chair_v002.blend    ← Version 2
+├── Chair_v003.blend    ← Latest version
+└── textures/           ← Shared textures folder
+    ├── BaseColor.png
+    └── Normal.png</code>
+                </div>
+
+                <div class="callout callout-info">
+                    <div class="callout-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Note:</strong> Textures are always in a shared folder, not versioned separately. Only .blend files are versioned.</p>
+                    </div>
+                </div>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('installation')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Installation</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('publishing')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>Publishing System <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <!-- Publishing Section -->
+        <template id="template-publishing">
+            <section id="publishing" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>Publishing System</span>
+                </div>
+                <h1>Publishing System</h1>
+                <p class="lead">Professional asset publishing with intelligent validation, automatic versioning, and foolproof delivery workflows.</p>
+
+                <h2>Pre-Publish Validation</h2>
+                <p>Before publishing, the addon runs comprehensive checks to ensure your asset is production-ready:</p>
+                <ul>
+                    <li><strong>Texture Folder Verification:</strong> Confirms textures are in the correct folder structure</li>
+                    <li><strong>Missing Texture Detection:</strong> Identifies broken or missing texture paths</li>
+                    <li><strong>External Texture Warnings:</strong> Alerts about textures outside the project folder</li>
+                    <li><strong>Orphan Data Checks:</strong> Finds unused data blocks that bloat file size</li>
+                    <li><strong>Packed Texture Alerts:</strong> Warns about packed textures that should be external</li>
+                </ul>
+
+                <h2>Validation States</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Color</th>
+                                <th>Meaning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ready</td>
+                                <td><span class="badge badge-success">Green</span></td>
+                                <td>All checks passed - safe to publish</td>
+                            </tr>
+                            <tr>
+                                <td>Warning</td>
+                                <td><span class="badge badge-warning">Yellow</span></td>
+                                <td>Non-critical issues - can force publish</td>
+                            </tr>
+                            <tr>
+                                <td>Error</td>
+                                <td><span class="badge badge-error">Red</span></td>
+                                <td>Critical issues - must fix before publishing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Publishing Features</h2>
+                <h3>Force Publish Mode</h3>
+                <p>Bypass non-critical warnings when you need to publish quickly. Critical errors still block publishing to prevent disasters.</p>
+
+                <h3>Automatic Versioning</h3>
+                <p>Two modes available:</p>
+                <ul>
+                    <li><strong>Overwrite Mode:</strong> Always replaces the existing file (e.g., <code>Chair.blend</code>)</li>
+                    <li><strong>Versioning Mode:</strong> Creates incremental versions (e.g., <code>Chair_v001.blend</code>, <code>Chair_v002.blend</code>)</li>
+                </ul>
+
+                <h3>Clean Delivery Structure</h3>
+                <p>Published assets follow this organized structure:</p>
+                <div class="code-block">
+<code>PublishPath/
+└── AssetName/
+    ├── AssetName.blend (or AssetName_v001.blend)
+    ├── AssetName_v002.blend (if versioning enabled)
+    └── textures/
+        ├── BaseColor.png
+        ├── Normal.png
+        └── Roughness.png</code>
+                </div>
+
+                <h3>Centralized Logging</h3>
+                <p>All publishing activity is logged in <code>.publish_activity.log</code> in your publish directory for audit trails and debugging.</p>
+
+                <h2>Linked Library Support</h2>
+                <p>Optionally include linked libraries when publishing:</p>
+                <ul>
+                    <li>Scan & validate library paths automatically</li>
+                    <li>Deep copy library assets with textures</li>
+                    <li>Structure mirroring preserves folder hierarchy</li>
+                    <li>External library detection for different drives</li>
+                </ul>
+
+                <div class="callout callout-warning">
+                    <div class="callout-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Limitation:</strong> Currently supports only 1 level of nesting. Link-in-link (nested libraries) is planned for v2.0 PRO.</p>
+                    </div>
+                </div>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('quick-start')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Quick Start</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('texture-tools')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>Texture Tools <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <!-- Texture Tools Section -->
+        <template id="template-texture-tools">
+            <section id="texture-tools" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>Texture Tools</span>
+                </div>
+                <h1>Texture Tools</h1>
+                <p class="lead">Powerful texture optimization and management tools to reduce file sizes and streamline your workflow.</p>
+
+                <h2>Texture Optimization</h2>
+                <h3>Downgrade/Restore Resolution</h3>
+                <p>Quickly adjust texture resolution for different use cases:</p>
+                <ul>
+                    <li><strong>Downgrade:</strong> Reduce texture sizes (4K → 2K → 1K → 512px → 256px)</li>
+                    <li><strong>Restore:</strong> Return to original full resolution</li>
+                    <li><strong>Smart Scaling:</strong> Maintains aspect ratios and quality</li>
+                </ul>
+
+                <div class="callout callout-tip">
+                    <div class="callout-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Use Cases:</strong> Web previews (512px), Game assets (1K-2K), Archival (4K+), Mobile (256-512px)</p>
+                    </div>
+                </div>
+
+                <h3>Format Conversion</h3>
+                <p>Convert between PNG and JPEG formats:</p>
+                <ul>
+                    <li><strong>PNG:</strong> Lossless compression, supports transparency</li>
+                    <li><strong>JPEG:</strong> Smaller file size, no transparency</li>
+                </ul>
+
+                <h3>Consolidate Duplicates</h3>
+                <p>Automatically detect and merge duplicate textures to reduce file bloat and improve performance.</p>
+
+                <h3>Cleanup Unused Textures</h3>
+                <p>Remove unused textures from your project with one click. Safely identifies and deletes textures not referenced by any material.</p>
+
+                <h2>Statistics Display</h2>
+                <p>Real-time texture metrics in the panel:</p>
+                <ul>
+                    <li><strong>Total Texture Count:</strong> Number of textures in the scene</li>
+                    <li><strong>External Textures Warning:</strong> Textures outside project folder</li>
+                    <li><strong>Unused Textures Count:</strong> Textures not used by any material</li>
+                    <li><strong>Packed Textures Tracking:</strong> Embedded textures in .blend file</li>
+                </ul>
+
+                <h2>Batch Rename Tools</h2>
+                <h3>Find & Replace</h3>
+                <p>Search and replace patterns in texture names with multiple rules support.</p>
+
+                <h3>Prefix/Suffix</h3>
+                <p>Add consistent naming conventions:</p>
+                <div class="code-block">
+<code>Before: BaseColor.png, Normal.png
+Prefix "T_": T_BaseColor.png, T_Normal.png
+Suffix "_01": BaseColor_01.png, Normal_01.png</code>
+                </div>
+
+                <h3>Auto-Correct Maps</h3>
+                <p>Smart texture type detection automatically fixes common naming issues:</p>
+                <ul>
+                    <li>base_color → BaseColor</li>
+                    <li>normal_map → Normal</li>
+                    <li>roughness_tex → Roughness</li>
+                </ul>
+
+                <h3>Batch File Save</h3>
+                <p>Apply all rename operations to disk files with pattern support for flexible naming conventions.</p>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('publishing')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Publishing System</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('versioning')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>Version Control <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <!-- Versioning Section -->
+        <template id="template-versioning">
+            <section id="versioning" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>Version Control</span>
+                </div>
+                <h1>Version Control</h1>
+                <p class="lead">Automatic version management with incremental numbering, descriptions, and restore capabilities.</p>
+
+                <h2>Auto-Increment Versioning</h2>
+                <p>The addon automatically manages version numbers using the <code>_v###</code> format:</p>
+                <div class="code-block">
+<code>Chair.blend → Chair_v001.blend
+Save again → Chair_v002.blend
+Save again → Chair_v003.blend</code>
+                </div>
+
+                <h2>Version Descriptions</h2>
+                <p>Add notes to each version for easy tracking:</p>
+                <ul>
+                    <li>What changed in this version</li>
+                    <li>Client feedback implemented</li>
+                    <li>Bug fixes or improvements</li>
+                </ul>
+
+                <h2>Restore System</h2>
+                <p>Revert to any previous version quickly and safely:</p>
+                <ol>
+                    <li>Open the Version Browser</li>
+                    <li>Select the version to restore</li>
+                    <li>Click "Restore Version"</li>
+                    <li>Current file is backed up before restore</li>
+                </ol>
+
+                <h2>Version Browser</h2>
+                <p>List all versions with detailed information:</p>
+                <ul>
+                    <li>Version number (v001, v002...)</li>
+                    <li>Creation date and time</li>
+                    <li>File size</li>
+                    <li>Version description</li>
+                </ul>
+
+                <h2>Safety Checks</h2>
+                <p>The versioning system includes protection against common mistakes:</p>
+
+                <h3>Prevents Versioning Published Files</h3>
+                <p>Published files are automatically detected and blocked from versioning to prevent recursive versions like <code>Chair_v001_v001.blend</code></p>
+
+                <div class="callout callout-warning">
+                    <div class="callout-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Published File Detection:</strong> If you try to version a published file, the addon will show the source file location and block the operation.</p>
+                    </div>
+                </div>
+
+                <h3>Version Conflict Detection</h3>
+                <p>If multiple versions exist with the same number, the addon alerts you and increments to the next available number.</p>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('texture-tools')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Texture Tools</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('file-protection')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>File Protection <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <!-- File Protection Section -->
+        <template id="template-file-protection">
+            <section id="file-protection" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>File Protection</span>
+                </div>
+                <h1>File Protection</h1>
+                <p class="lead">Work safely with 4-layer auto-detection system that prevents editing published files.</p>
+
+                <h2>4-Layer Auto-Detection System</h2>
+                <p>The addon uses multiple detection methods to identify published files:</p>
+
+                <h3>1. File Pattern Detection</h3>
+                <p>Recognizes published filename format:</p>
+                <div class="code-block">
+<code>AssetName_v###.blend  ← Detected as published</code>
+                </div>
+
+                <h3>2. Folder Pattern Detection</h3>
+                <p>Identifies published directory structure:</p>
+                <div class="code-block">
+<code>PublishPath/AssetName_v###/  ← Detected as published folder</code>
+                </div>
+
+                <h3>3. Log Parsing</h3>
+                <p>Checks <code>.publish_activity.log</code> in the publish path to verify if the file was officially published.</p>
+
+                <h3>4. Recursive Search</h3>
+                <p>Scans up to 5 parent directories looking for publish logs to catch nested structures.</p>
+
+                <h2>Protection Features</h2>
+
+                <h3>Auto-Detection on File Open</h3>
+                <p>No manual validation needed! The addon automatically detects published files when you open them.</p>
+
+                <h3>Blocks All Operations</h3>
+                <p>When a published file is detected, all potentially dangerous operations are disabled:</p>
+                <ul>
+                    <li>❌ Publishing</li>
+                    <li>❌ Versioning</li>
+                    <li>❌ Texture optimization</li>
+                    <li>❌ Batch rename</li>
+                    <li>❌ All file modifications</li>
+                </ul>
+
+                <h3>Prevents Recursive Versioning</h3>
+                <p>Stops accidental creation of double-versioned files:</p>
+                <div class="code-block">
+<code>❌ Blocked: Chair_v001_v001.blend
+✅ Correct: Work on source file, then publish</code>
+                </div>
+
+                <h3>Clickable Source Path</h3>
+                <p>The warning message shows the source file location. Click to copy the path to clipboard.</p>
+
+                <h3>Published Library Detection</h3>
+                <p>Validates linked library files to ensure they aren't published versions.</p>
+
+                <h3>Inline Warnings</h3>
+                <p>All 5 panels display clear warning messages when a published file is opened:</p>
+                <div class="callout callout-error">
+                    <div class="callout-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Published File Detected:</strong> Source: D:/Projects/MyAsset/MyAsset.blend - All operations disabled to prevent modifications.</p>
+                    </div>
+                </div>
+
+                <h3>Performance-Optimized Caching</h3>
+                <p>Detection results are cached to avoid repeated file system scans, ensuring smooth performance.</p>
+
+                <h2>How to Work Correctly</h2>
+                <ol>
+                    <li><strong>Keep source files separate:</strong> Work on source files in your development folder</li>
+                    <li><strong>Publish when ready:</strong> Use the publishing system to create deliverable versions</li>
+                    <li><strong>Don't edit published files:</strong> If you need changes, modify the source and re-publish</li>
+                </ol>
+
+                <div class="callout callout-success">
+                    <div class="callout-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Best Practice:</strong> Maintain clear separation: <code>D:/Projects/</code> (source files) and <code>D:/Published/</code> (delivery files)</p>
+                    </div>
+                </div>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('versioning')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Version Control</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('asset-optimization')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>Asset Optimization <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <!-- Scene Analysis, Batch Operations, Linked Libraries, FAQ, and Troubleshooting templates would follow here -->
+
+        <template id="template-scene-analysis">
+            <section id="scene-analysis" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>Scene Analysis</span>
+                </div>
+                <h1>Scene Analysis</h1>
+                <p class="lead">Deep scan your project to audit assets, materials, textures, and linked libraries before publishing.</p>
+                <h2>How to Analyze</h2>
+                <ol>
+                    <li>Click <strong>"Analyze Scene Deeply"</strong> in the High Poly panel</li>
+                    <li>Watch the progress bar (multi-threaded processing)</li>
+                    <li>Review the dialog popup with report previews</li>
+                    <li>Click <strong>"Switch to Scripting Workspace"</strong></li>
+                    <li>View full reports in the Text Editor</li>
+                </ol>
+                <h2>Reports Generated</h2>
+                <ul>
+                    <li><strong>Material Usage:</strong> Complete breakdown of materials and their usage across objects</li>
+                    <li><strong>Texture Paths:</strong> List of all texture files with full paths and missing file detection</li>
+                    <li><strong>Linked Libraries:</strong> Dependencies and external library references</li>
+                </ul>
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('file-protection')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> File Protection</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('batch-operations')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>Batch Operations <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <template id="template-batch-operations">
+            <section id="batch-operations" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>Batch Operations</span>
+                </div>
+                <h1>Batch Operations</h1>
+                <p class="lead">Streamline repetitive tasks with powerful batch processing tools.</p>
+                <h2>Batch Rename Features</h2>
+                <ul>
+                    <li><strong>Find & Replace:</strong> Multiple search-replace rules</li>
+                    <li><strong>Prefix/Suffix:</strong> Add consistent naming</li>
+                    <li><strong>Auto-Correct Maps:</strong> Smart texture type detection</li>
+                    <li><strong>Batch File Save:</strong> Apply renames to disk</li>
+                </ul>
+                <div class="callout callout-info">
+                    <div class="callout-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Coming in v2.0 PRO:</strong> Batch publishing, batch texture downgrade, and multi-file operations.</p>
+                    </div>
+                </div>
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('scene-analysis')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Scene Analysis</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('linked-libraries')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>Linked Libraries <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <template id="template-linked-libraries">
+            <section id="linked-libraries" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>Linked Libraries</span>
+                </div>
+                <h1>Linked Libraries</h1>
+                <p class="lead">Manage and publish assets with linked library dependencies.</p>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Include/exclude in publish:</strong> Optional library publishing</li>
+                    <li><strong>Scan & validate library paths:</strong> Automatic dependency checking</li>
+                    <li><strong>Deep copy library assets with textures:</strong> Complete asset delivery</li>
+                    <li><strong>Structure mirroring:</strong> Preserves folder hierarchy</li>
+                    <li><strong>External library detection:</strong> Different drives support</li>
+                </ul>
+                <div class="callout callout-warning">
+                    <div class="callout-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Limitation:</strong> Only supports 1 level of nesting. Link-in-link not supported in v1.2.0.</p>
+                    </div>
+                </div>
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('batch-operations')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Batch Operations</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('faq')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>FAQ <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <!-- Asset Optimization Section -->
+        <template id="template-asset-optimization">
+            <section id="asset-optimization" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>Asset Optimization</span>
+                </div>
+                <h1>Asset Optimization</h1>
+                <p class="lead">Comprehensive tools to optimize your Blender assets, consolidate duplicates, and cleanup unused data for cleaner project files.</p>
+
+                <h2>Optimize Linked Objects</h2>
+                <p>Automatically optimize all linked library objects in your scene:</p>
+                <ul>
+                    <li><strong>Make Local:</strong> Convert linked objects to local copies</li>
+                    <li><strong>Material Consolidation:</strong> Merge duplicate materials automatically</li>
+                    <li><strong>Texture Optimization:</strong> Remove duplicate texture references</li>
+                    <li><strong>Clean Structure:</strong> Organize object hierarchy</li>
+                </ul>
+
+                <h2>Consolidate Material Duplicates</h2>
+                <p>Find and merge duplicate materials across your entire project:</p>
+                <ul>
+                    <li><strong>Smart Detection:</strong> Identifies materials with identical properties</li>
+                    <li><strong>Name-Based Matching:</strong> Detects variants like Material.001, Material.002</li>
+                    <li><strong>Safe Merging:</strong> Preserves one master material, reassigns all duplicates</li>
+                    <li><strong>Report Summary:</strong> Shows how many materials were consolidated</li>
+                </ul>
+
+                <div class="callout callout-tip">
+                    <div class="callout-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>File Size Reduction:</strong> Consolidating duplicates can reduce .blend file size by 20-40% in complex scenes.</p>
+                    </div>
+                </div>
+
+                <h2>Cleanup Operations</h2>
+                <h3>Clear Unused Material Slots</h3>
+                <p>Remove empty or unused material slots from all objects in your scene.</p>
+
+                <h3>Remove Orphan Data Blocks</h3>
+                <p>Delete all orphan data (meshes, materials, images, node groups) that are not actively used:</p>
+                <ul>
+                    <li>Unused meshes and curves</li>
+                    <li>Unused materials and textures</li>
+                    <li>Unused node groups</li>
+                    <li>Unused armatures and lattices</li>
+                </ul>
+
+                <h3>Deep Scene Cleanup</h3>
+                <p>Comprehensive cleanup operation that combines all cleanup tools:</p>
+                <ol>
+                    <li>Clear unused material slots</li>
+                    <li>Remove orphan data blocks</li>
+                    <li>Purge unused linked libraries</li>
+                    <li>Optimize memory usage</li>
+                </ol>
+
+                <div class="callout callout-success">
+                    <div class="callout-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Best Practice:</strong> Run deep cleanup before publishing assets to ensure clean, professional delivery.</p>
+                    </div>
+                </div>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('linked-libraries')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Linked Libraries</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('duplicate-finder')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>Duplicate Finder <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <!-- Duplicate Materials & Textures Section -->
+        <template id="template-duplicate-finder">
+            <section id="duplicate-finder" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>Duplicate Materials & Textures</span>
+                </div>
+                <h1>Duplicate Materials & Textures</h1>
+                <p class="lead">Powerful duplicate detection and consolidation tools to keep your projects clean and optimized.</p>
+
+                <h2>Material Duplicate Detection</h2>
+                <p>The addon automatically detects material duplicates using multiple methods:</p>
+
+                <h3>Name-Based Detection</h3>
+                <p>Identifies materials with Blender's default naming pattern:</p>
+                <div class="code-block">
+<code>Original: "Wood"
+Duplicates: "Wood.001", "Wood.002", "Wood.003"
+→ All merged back to "Wood"</code>
+                </div>
+
+                <h3>Property-Based Detection</h3>
+                <p>Compares material properties to find functionally identical materials:</p>
+                <ul>
+                    <li>Shader node structure</li>
+                    <li>Color values and settings</li>
+                    <li>Texture references</li>
+                    <li>Blend modes and settings</li>
+                </ul>
+
+                <h2>Texture Duplicate Detection</h2>
+                <p>Find and merge duplicate texture files:</p>
+                <ul>
+                    <li><strong>File Hash Comparison:</strong> Detects identical files with different names</li>
+                    <li><strong>Path Normalization:</strong> Finds same texture loaded from different paths</li>
+                    <li><strong>Packed vs External:</strong> Detects packed textures that match external files</li>
+                </ul>
+
+                <h2>Consolidation Workflow</h2>
+                <div class="steps-container">
+                    <h3>1. Scan Scene</h3>
+                    <p>Click <strong>"Scan for Duplicates"</strong> in the Optimization panel.</p>
+
+                    <h3>2. Review Report</h3>
+                    <p>Check the duplicate detection report showing:</p>
+                    <ul>
+                        <li>Number of duplicate materials found</li>
+                        <li>Number of duplicate textures found</li>
+                        <li>Estimated file size reduction</li>
+                    </ul>
+
+                    <h3>3. Consolidate</h3>
+                    <p>Click <strong>"Consolidate Duplicates"</strong> to merge automatically.</p>
+                </div>
+
+                <h2>Benefits</h2>
+                <ul>
+                    <li><strong>Smaller File Sizes:</strong> Reduce .blend file size by 20-50%</li>
+                    <li><strong>Better Performance:</strong> Fewer materials = faster rendering</li>
+                    <li><strong>Easier Management:</strong> Cleaner material list</li>
+                    <li><strong>Professional Delivery:</strong> Optimized assets for clients</li>
+                </ul>
+
+                <div class="callout callout-warning">
+                    <div class="callout-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Important:</strong> Always save a backup before consolidating duplicates. While safe, you may want to revert if unexpected results occur.</p>
+                    </div>
+                </div>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('asset-optimization')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Asset Optimization</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('high-poly-check')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>High Poly Analysis <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <!-- High Poly Analysis Section -->
+        <template id="template-high-poly-check">
+            <section id="high-poly-check" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>High Poly Analysis</span>
+                </div>
+                <h1>High Poly Analysis</h1>
+                <p class="lead">Identify and manage high-polygon objects in your scene to optimize performance and meet project requirements.</p>
+
+                <h2>Triangle Count Analysis</h2>
+                <p>Real-time polygon count tracking for your entire scene:</p>
+                <ul>
+                    <li><strong>Per-Object Counts:</strong> View triangle count for each object</li>
+                    <li><strong>Scene Total:</strong> Overall polygon count for entire scene</li>
+                    <li><strong>Modifier-Aware:</strong> Includes subdivision surface and other modifiers</li>
+                    <li><strong>Real-Time Display:</strong> Updates as you edit the scene</li>
+                </ul>
+
+                <h2>Configurable Threshold</h2>
+                <p>Set custom polygon limits based on your project needs:</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Use Case</th>
+                                <th>Recommended Threshold</th>
+                                <th>Target Platform</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mobile Games</td>
+                                <td>1,000 - 5,000 tris</td>
+                                <td>iOS, Android</td>
+                            </tr>
+                            <tr>
+                                <td>Desktop Games</td>
+                                <td>10,000 - 50,000 tris</td>
+                                <td>PC, Console</td>
+                            </tr>
+                            <tr>
+                                <td>VR/AR</td>
+                                <td>5,000 - 15,000 tris</td>
+                                <td>Quest, PSVR</td>
+                            </tr>
+                            <tr>
+                                <td>Film/Animation</td>
+                                <td>50,000 - 500,000 tris</td>
+                                <td>Offline Render</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Detection Features</h2>
+                <h3>Automatic Flagging</h3>
+                <p>Objects exceeding the threshold are automatically highlighted in the list with warning indicators.</p>
+
+                <h3>Isolate High-Poly Objects</h3>
+                <p>One-click isolation to hide all other objects and focus on optimization:</p>
+                <ol>
+                    <li>Set your polygon threshold (e.g., 10,000 tris)</li>
+                    <li>Click <strong>"Detect High Poly"</strong></li>
+                    <li>Review flagged objects in the list</li>
+                    <li>Click <strong>"Isolate Selection"</strong></li>
+                    <li>Optimize the high-poly objects</li>
+                    <li>Click <strong>"Show All"</strong> when done</li>
+                </ol>
+
+                <h3>Select High-Poly Objects</h3>
+                <p>Batch-select all flagged objects for group operations:</p>
+                <ul>
+                    <li>Apply decimation modifier</li>
+                    <li>Reduce subdivision levels</li>
+                    <li>Optimize geometry</li>
+                    <li>Export to separate file</li>
+                </ul>
+
+                <h2>Optimization Workflow</h2>
+                <div class="steps-container">
+                    <h3>1. Analyze Scene</h3>
+                    <p>Run High Poly Analysis to get per-object triangle counts.</p>
+
+                    <h3>2. Set Threshold</h3>
+                    <p>Define maximum acceptable polygon count for your project.</p>
+
+                    <h3>3. Flag Objects</h3>
+                    <p>View all objects exceeding the threshold in the list.</p>
+
+                    <h3>4. Optimize</h3>
+                    <p>Use Blender's tools to reduce polygon count:</p>
+                    <ul>
+                        <li>Decimate modifier</li>
+                        <li>Reduce subdivision levels</li>
+                        <li>Retopology</li>
+                        <li>Remove unnecessary edge loops</li>
+                    </ul>
+                </div>
+
+                <div class="callout callout-info">
+                    <div class="callout-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Performance Tip:</strong> For game assets, aim for the lowest polygon count that maintains visual quality. Modern decimation can reduce polys by 50-70% with minimal quality loss.</p>
+                    </div>
+                </div>
+
+                <h2>Transform Check</h2>
+                <p>Detect objects with unapplied transforms:</p>
+                <ul>
+                    <li><strong>Scale Detection:</strong> Find extreme scale values</li>
+                    <li><strong>Rotation Issues:</strong> Identify problematic rotations</li>
+                    <li><strong>Bulk Apply:</strong> Apply all transforms with safety checks</li>
+                </ul>
+
+                <div class="callout callout-warning">
+                    <div class="callout-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Rigged Objects Warning:</strong> Applying transforms to rigged objects can break animations. The addon detects armature modifiers and warns before applying.</p>
+                    </div>
+                </div>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('duplicate-finder')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Duplicate Finder</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('scene-analysis')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>Advanced Scene Analysis <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <template id="template-faq">
+            <section id="faq" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>FAQ</span>
+                </div>
+                <h1>Frequently Asked Questions</h1>
+                <p class="lead">Common questions and answers about Asset Management.</p>
+                <h2>General Questions</h2>
+                <h3><i class="fas fa-question-circle"></i> Is Asset Management really free?</h3>
+                <p>Yes! 100% free and open source under GPL-3.0 license. All current features remain free forever. A v2.0 PRO version with batch operations is planned as an optional upgrade (~$15-19).</p>
+                
+                <h3><i class="fas fa-question-circle"></i> What Blender versions are supported?</h3>
+                <p>Blender 4.0 and above. Tested on versions 4.0 through 4.5.1.</p>
+
+                <h3><i class="fas fa-question-circle"></i> Can I use this for commercial projects?</h3>
+                <p>Absolutely! The GPL-3.0 license allows commercial use. You can use it for freelance work, studio projects, and asset stores.</p>
+
+                <h2>Technical Questions</h2>
+                <h3><i class="fas fa-question-circle"></i> Why do textures need to be in a "textures" folder?</h3>
+                <p>This ensures clean, organized delivery structure and makes it easy to identify and copy texture files during publishing.</p>
+
+                <h3><i class="fas fa-question-circle"></i> What happens if I try to publish without textures folder?</h3>
+                <p>The validation will show a warning. You can force publish, but textures won't be copied to the published location.</p>
+
+                <h3><i class="fas fa-question-circle"></i> Can I customize the publish path per asset?</h3>
+                <p>Currently, there's one global publish path. You can change it anytime in the Publishing Panel.</p>
+
+                <h2>Workflow Questions</h2>
+                <h3><i class="fas fa-question-circle"></i> Should I use Overwrite or Versioning mode?</h3>
+                <p><strong>Overwrite:</strong> For daily updates and work-in-progress. <strong>Versioning:</strong> For client deliveries and milestone tracking.</p>
+
+                <h3><i class="fas fa-question-circle"></i> How do I report bugs or request features?</h3>
+                <p>Open an issue on the <a href="https://github.com/alfajririzqi/asset_management/issues" target="_blank">GitHub Issues</a> page with your Blender version and steps to reproduce.</p>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('linked-libraries')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> Linked Libraries</strong>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateTo('troubleshooting')" class="doc-nav-btn doc-nav-next">
+                        <span>Next</span>
+                        <strong>Troubleshooting <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+
+        <template id="template-troubleshooting">
+            <section id="troubleshooting" class="doc-section">
+                <div class="breadcrumb">
+                    <a href="javascript:void(0)" onclick="navigateTo('introduction')">Introduction</a>
+                    <span>/</span>
+                    <span>Troubleshooting</span>
+                </div>
+                <h1>Troubleshooting</h1>
+                <p class="lead">Solutions to common issues and error messages.</p>
+
+                <h2>Installation Issues</h2>
+                <h3>❌ "Addon not showing up after installation"</h3>
+                <p><strong>Solution:</strong></p>
+                <ol>
+                    <li>Make sure you didn't extract the ZIP file (install the ZIP directly)</li>
+                    <li>Check if the addon is enabled (checkbox next to "Asset Management")</li>
+                    <li>Restart Blender</li>
+                    <li>Check N-panel → Asset Management tab</li>
+                </ol>
+
+                <h3>❌ "Python error on enable"</h3>
+                <p><strong>Solution:</strong></p>
+                <ol>
+                    <li>Ensure you're using Blender 4.0 or higher</li>
+                    <li>Download the latest release from GitHub</li>
+                    <li>Remove old version before installing new one</li>
+                </ol>
+
+                <h2>Publishing Issues</h2>
+                <h3>❌ "Textures not copied to published folder"</h3>
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>Verify textures are in a folder named exactly "textures"</li>
+                    <li>Check texture paths in Blender (must be relative to .blend file)</li>
+                    <li>Unpack packed textures before publishing</li>
+                </ul>
+
+                <h3>❌ "Published file detected when opening source file"</h3>
+                <p><strong>Solution:</strong></p>
+                <ol>
+                    <li>Check if the file has "_v###" in the filename (published pattern)</li>
+                    <li>Check if .publish_activity.log exists in parent directories</li>
+                    <li>If false positive, rename file to remove version pattern</li>
+                </ol>
+
+                <h2>Performance Issues</h2>
+                <h3>⚠️ "Scene analysis is slow"</h3>
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>Close unused Blender instances</li>
+                    <li>Analysis is multi-threaded but large scenes (>10K objects) take time</li>
+                    <li>Consider analyzing in sections</li>
+                </ul>
+
+                <h2>Versioning Issues</h2>
+                <h3>❌ "Versioning blocked on my source file"</h3>
+                <p><strong>Solution:</strong></p>
+                <ol>
+                    <li>Check if your source file is accidentally inside the publish directory</li>
+                    <li>Move source files outside the publish path</li>
+                    <li>Remove .publish_activity.log if it exists near your source files</li>
+                </ol>
+
+                <h2>Getting More Help</h2>
+                <p>If your issue isn't covered here:</p>
+                <ul>
+                    <li><strong>GitHub Issues:</strong> <a href="https://github.com/alfajririzqi/asset_management/issues" target="_blank">Open an issue</a> with Blender version and error details</li>
+                    <li><strong>GitHub Discussions:</strong> <a href="https://github.com/alfajririzqi/asset_management/discussions" target="_blank">Ask the community</a></li>
+                    <li><strong>Documentation:</strong> Review the relevant section again</li>
+                </ul>
+
+                <div class="doc-navigation">
+                    <a href="javascript:void(0)" onclick="navigateTo('faq')" class="doc-nav-btn doc-nav-prev">
+                        <span>Previous</span>
+                        <strong><i class="fas fa-arrow-left"></i> FAQ</strong>
+                    </a>
+                </div>
+            </section>
+        </template>
+    </div>
+
+    <!-- Combined JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
