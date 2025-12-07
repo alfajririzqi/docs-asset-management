@@ -1,19 +1,17 @@
-// Asset Management Documentation - JavaScript
+// Asset Management Documentation
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Loaded, readyState:', document.readyState);
     
-    // Hide preloader after page load
+    // Preloader
     const preloader = document.getElementById('preloader');
     if (preloader) {
         console.log('Preloader found');
-        // Immediate hide if page already loaded
         if (document.readyState === 'complete') {
             console.log('Page complete, hiding preloader immediately');
             preloader.classList.add('hidden');
             setTimeout(() => preloader.style.display = 'none', 200);
         } else {
-            // Wait for resources
             console.log('Waiting 300ms before hiding preloader');
             setTimeout(() => {
                 console.log('Hiding preloader now');
@@ -28,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.warn('Preloader not found!');
     }
 
-    // Fallback: Force hide preloader after 3 seconds (safety)
     setTimeout(() => {
         if (preloader && preloader.style.display !== 'none') {
             console.warn('Force hiding preloader (fallback)');
@@ -36,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 3000);
 
-    // Elements
+    // DOM elements
     const mainContent = document.querySelector('.content-wrapper');
     const sidebar = document.getElementById('sidebar');
     const sidebarToggle = document.getElementById('sidebarToggle');
@@ -44,15 +41,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const tocNav = document.getElementById('tocNav');
     const searchInput = document.getElementById('searchInput');
 
-    // Current active section
+    // State
     let currentSection = 'introduction';
-    
-    // Search query for content highlighting
     let currentSearchQuery = '';
     
-    // ==================== //
-    // Content Highlighting Functions
-    // ==================== //
+    // Content highlighting for search results
     function highlightContentText(query) {
         if (!query) return;
         
@@ -64,13 +57,11 @@ document.addEventListener('DOMContentLoaded', function() {
             NodeFilter.SHOW_TEXT,
             {
                 acceptNode: function(node) {
-                    // Skip script, style, and already marked content
                     if (node.parentElement.tagName === 'SCRIPT' || 
                         node.parentElement.tagName === 'STYLE' ||
                         node.parentElement.tagName === 'MARK') {
                         return NodeFilter.FILTER_REJECT;
                     }
-                    // Only accept nodes with matching text
                     if (node.textContent.toLowerCase().includes(query.toLowerCase())) {
                         return NodeFilter.FILTER_ACCEPT;
                     }
@@ -87,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
             nodesToReplace.push(node);
         }
         
-        // Replace text nodes with highlighted version
         nodesToReplace.forEach(textNode => {
             const parent = textNode.parentElement;
             const text = textNode.textContent;
@@ -98,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const temp = document.createElement('span');
                 temp.innerHTML = html;
                 
-                // Replace text node with new marked content
                 while (temp.firstChild) {
                     parent.insertBefore(temp.firstChild, textNode);
                 }
@@ -106,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Auto-scroll to first highlight
         setTimeout(() => {
             const firstMark = content.querySelector('mark.search-highlight-content');
             if (firstMark) {
@@ -130,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
             parent.replaceChild(document.createTextNode(textContent), mark);
         });
         
-        // Normalize to merge adjacent text nodes
         const content = document.querySelector('.content-wrapper');
         if (content) {
             content.normalize();
@@ -141,27 +128,19 @@ document.addEventListener('DOMContentLoaded', function() {
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
-    // ==================== //
-    // Navigation System
-    // ==================== //
+    // Navigation
     window.navigateTo = function(section) {
-        // Load documentation section
         loadDocContent(section);
         
-        // Update URL hash (empty for homepage)
         if (section === 'home') {
             history.pushState(null, null, window.location.pathname);
         } else {
             window.location.hash = section;
         }
         
-        // Update active nav link
         updateActiveNavLink(section);
-        
-        // Scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
         
-        // Close mobile sidebar if open and reset hamburger
         if (sidebar && sidebar.classList.contains('active')) {
             sidebar.classList.remove('active');
             if (sidebarToggle) {
@@ -172,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
         currentSection = section;
     };
 
-    // Load Documentation Content
     function loadDocContent(sectionId) {
         if (!mainContent) return;
         
@@ -182,26 +160,21 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Fade out current content
         mainContent.style.opacity = '0';
         
         setTimeout(() => {
-            // Clear and load new content
             mainContent.innerHTML = '';
             const content = template.content.cloneNode(true);
             mainContent.appendChild(content);
             
-            // Generate TOC
             generateTOC(sectionId);
             
-            // Apply content highlighting if search query exists
             if (currentSearchQuery) {
                 setTimeout(() => {
                     highlightContentText(currentSearchQuery);
                 }, 100);
             }
             
-            // Fade in new content
             setTimeout(() => {
                 mainContent.style.opacity = '1';
             }, 50);
@@ -220,24 +193,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ==================== //
-    // Table of Contents Generation
-    // ==================== //
+    // Table of Contents
     function generateTOC(sectionId) {
         if (!tocNav) return;
         
-        // Show TOC on all pages including homepage
         const tocContainer = document.querySelector('.toc');
         if (tocContainer) tocContainer.style.display = 'block';
         
         tocNav.innerHTML = '';
         
-        // Keep TOC empty on homepage
         if (sectionId === 'home') {
             return;
         }
         
-        // Get all h2 and h3 in the current section
         const section = mainContent.querySelector('.doc-section');
         if (!section) return;
         
@@ -269,30 +237,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ==================== //
-    // Initialize on Page Load
-    // ==================== //
     function initialize() {
-        // Check URL hash
         const hash = window.location.hash.substring(1);
         
         if (hash && hash !== '') {
             navigateTo(hash);
         } else {
-            // Default to homepage
             navigateTo('home');
         }
     }
 
-    // Handle browser back/forward
     window.addEventListener('hashchange', function() {
         const hash = window.location.hash.substring(1) || 'introduction';
         navigateTo(hash);
     });
 
-    // ==================== //
-    // Sidebar Toggle (Mobile)
-    // ==================== //
     if (sidebarToggle) {
         sidebarToggle.addEventListener('change', function() {
             if (this.checked) {
@@ -304,7 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const toggleLabel = document.querySelector('.sidebar-toggle');
         
-        // Close sidebar when clicking outside
         document.addEventListener('click', function(e) {
             if (sidebar.classList.contains('active') && 
                 !sidebar.contains(e.target) && 
@@ -314,7 +272,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Close sidebar when clicking nav link
         const navLinks = sidebar.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
@@ -324,19 +281,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ==================== //
-    // Dark Mode Toggle (Checkbox Style)
-    // ==================== //
+    // Dark mode
     const currentTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
     
-    // Set initial preloader theme
     if (preloader && currentTheme === 'dark') {
         preloader.classList.add('dark-mode');
     }
     
     if (themeToggle) {
-        // Set initial checkbox state
         themeToggle.checked = currentTheme === 'dark';
         
         themeToggle.addEventListener('change', function() {
@@ -345,7 +298,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             
-            // Update preloader theme if it exists
             if (preloader) {
                 if (newTheme === 'dark') {
                     preloader.classList.add('dark-mode');
@@ -356,9 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ==================== //
-    // Search Functionality - Full Content Search
-    // ==================== //
+    // Search functionality
     let searchResultsContainer = null;
     let isSearchMode = false;
 
@@ -372,13 +322,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const section = content.querySelector('.doc-section');
             
             if (section) {
-                // Get title
                 const title = section.querySelector('h1')?.textContent || sectionId;
-                
-                // Get all text content
                 const textContent = section.textContent.toLowerCase();
-                
-                // Get headings for context
                 const headings = Array.from(section.querySelectorAll('h2, h3')).map(h => ({
                     text: h.textContent,
                     level: h.tagName
@@ -424,7 +369,6 @@ document.addEventListener('DOMContentLoaded', function() {
         searchInput.addEventListener('input', function(e) {
             const query = e.target.value.toLowerCase().trim();
             
-            // Clear search - restore navigation
             if (query === '') {
                 if (searchResultsContainer) {
                     searchResultsContainer.remove();
@@ -432,29 +376,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 document.querySelector('.sidebar-nav').style.display = 'block';
                 isSearchMode = false;
-                
-                // Clear search query and content highlights
                 currentSearchQuery = '';
                 clearContentHighlights();
                 return;
             }
 
-            // Enter search mode
             isSearchMode = true;
             document.querySelector('.sidebar-nav').style.display = 'none';
             
-            // Remove old results
             if (searchResultsContainer) {
                 searchResultsContainer.remove();
             }
             
-            // Search in all sections
             const results = [];
             allSections.forEach(section => {
                 if (section.content.includes(query)) {
                     const snippet = getContentSnippet(section.content, query);
-                    
-                    // Find matching headings
                     const matchingHeadings = section.headings.filter(h => 
                         h.text.toLowerCase().includes(query)
                     );
@@ -502,17 +439,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             sidebar.querySelector('.sidebar-content').appendChild(searchResultsContainer);
             
-            // Add click handlers to search results
             const resultItems = searchResultsContainer.querySelectorAll('.search-result-item');
             resultItems.forEach(item => {
                 item.addEventListener('click', function() {
                     const sectionId = this.getAttribute('data-section');
                     const searchQuery = this.getAttribute('data-query');
                     
-                    // Store search query
                     currentSearchQuery = searchQuery;
                     
-                    // Close sidebar on mobile
                     if (sidebar && sidebar.classList.contains('active')) {
                         sidebar.classList.remove('active');
                         if (sidebarToggle) {
@@ -520,13 +454,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                     
-                    // Navigate to section
                     navigateTo(sectionId);
                 });
             });
         });
 
-        // Clear search on ESC key
         searchInput.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 searchInput.value = '';
@@ -536,9 +468,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ==================== //
-    // Copy Code Blocks
-    // ==================== //
+    // Copy code blocks
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('copy-btn') || e.target.closest('.copy-btn')) {
             const btn = e.target.classList.contains('copy-btn') ? e.target : e.target.closest('.copy-btn');
@@ -556,6 +486,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Initialize
+    // Start
     initialize();
 });

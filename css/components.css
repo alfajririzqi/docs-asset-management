@@ -1,11 +1,6 @@
-/* ==================== */
-/* COMPONENTS STYLES */
-/* UI Elements: Buttons, Cards, Callouts, Tables, Badges, Code Blocks, etc. */
-/* ==================== */
+/* Components */
 
-/* ==================== */
-/* Homepage Components */
-/* ==================== */
+/* Homepage */
 #homepage {
     min-height: 100vh;
     background-color: var(--bg-primary);
@@ -166,9 +161,7 @@
     box-shadow: 0 20px 25px -5px rgba(45, 30, 74, 0.6);
 }
 
-/* ==================== */
 /* Buttons */
-/* ==================== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -219,9 +212,7 @@
     font-size: 0.875rem;
 }
 
-/* ==================== */
-/* Info Cards */
-/* ==================== */
+/* Info cards */
 .info-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -286,9 +277,7 @@
     color: var(--text-tertiary);
 }
 
-/* ==================== */
 /* Callouts */
-/* ==================== */
 .callout {
     display: flex;
     align-items: center;
@@ -402,9 +391,7 @@
     color: #FBBF24;
 }
 
-/* ==================== */
-/* Code Blocks */
-/* ==================== */
+/* Code blocks */
 .code-block {
     background: #0A0A0A;
     border: 1px solid #1F1F1F;
@@ -454,9 +441,7 @@
     color: var(--primary-color);
 }
 
-/* ==================== */
-/* Steps Container */
-/* ==================== */
+/* Steps container */
 .steps-container {
     padding: 1.5rem;
     background: rgba(255, 255, 255, 0.4);
@@ -511,9 +496,7 @@
     padding: 0;
 }
 
-/* ==================== */
 /* Tables */
-/* ==================== */
 .table-wrapper {
     overflow-x: auto;
     margin: 1.5rem 0;
@@ -526,9 +509,9 @@
 }
 
 [data-theme="dark"] .table-wrapper {
-    background: rgba(20, 20, 24, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(20, 20, 24, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-color: rgba(60, 56, 70, 0.6);
 }
 
@@ -573,9 +556,7 @@ tbody tr:hover {
     background: rgba(20, 20, 24, 0.4);
 }
 
-/* ==================== */
 /* Badges */
-/* ==================== */
 .badge-success {
     background-color: rgba(16, 185, 129, 0.1);
     color: var(--success-color);
@@ -591,9 +572,7 @@ tbody tr:hover {
     color: var(--error-color);
 }
 
-/* ==================== */
-/* Document Navigation */
-/* ==================== */
+/* Document navigation */
 .doc-navigation {
     display: flex;
     justify-content: space-between;
@@ -659,9 +638,7 @@ tbody tr:hover {
     text-align: right;
 }
 
-/* ==================== */
 /* FAQ */
-/* ==================== */
 .faq-item {
     padding: 1.5rem;
     margin-bottom: 1.5rem;

@@ -1,14 +1,4 @@
-/* ==================== */
-/* MAIN CSS - Asset Management Documentation */
-/* Entry Point: Imports all modular CSS files */
-/* ==================== */
-
-/* Import Order:
-   1. Base (foundation, variables, typography)
-   2. Layout (structure, grid, header, sidebar, footer)
-   3. Components (buttons, cards, callouts, tables)
-   4. Responsive (mobile & tablet breakpoints)
-*/
+/* Asset Management Documentation */
 
 @import url('base.css');
 @import url('layout.css');

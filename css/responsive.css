@@ -1,11 +1,6 @@
-/* ==================== */
-/* RESPONSIVE STYLES */
-/* Mobile & Tablet Breakpoints */
-/* ==================== */
+/* Responsive */
 
-/* ==================== */
-/* Tablet: Hide TOC */
-/* ==================== */
+/* Tablet (≤1200px) */
 @media (max-width: 1200px) {
     .main-layout {
         grid-template-columns: 260px 1fr;
@@ -16,9 +11,7 @@
     }
 }
 
-/* ==================== */
-/* Mobile: Single Column + Sidebar Toggle */
-/* ==================== */
+/* Mobile (≤768px) */
 @media (max-width: 768px) {
     .sidebar-toggle {
         display: block;
@@ -28,7 +21,6 @@
         display: none !important;
     }
 
-    /* Remove ALL blur from sidebar on mobile */
     .sidebar {
         background: #ffffff !important;
         backdrop-filter: none !important;
@@ -55,7 +47,7 @@
 
     .main-layout {
         grid-template-columns: 1fr;
-        padding: 0 0.7rem;
+        padding: 1rem;
     }
 
     .sidebar {
@@ -124,7 +116,6 @@
         align-items: center;
     }
 
-    /* Typography Adjustments */
     h1 {
         font-size: 2rem;
     }
@@ -133,7 +124,6 @@
         font-size: 1.5rem;
     }
 
-    /* Homepage Mobile Styles */
     .homepage-hero {
         padding: 1rem 1rem 2rem;
     }
@@ -143,7 +133,7 @@
     }
 
     .hero-description {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     .hero-actions {
@@ -179,14 +169,12 @@
         padding: 1.5rem;
     }
 
-    /* Preloader Mobile Size */
     .three-body {
         --uib-size: 25px;
     }
 
-    /* Header Mobile Fixes */
     .header-container {
-        padding: 0 0.75rem;
+        padding: 0 1rem;
     }
 
     .logo {
@@ -242,7 +230,6 @@
         transform: translateX(18px);
     }
 
-    /* Social Icons Mobile */
     .social-icons {
         gap: 0.5rem;
     }
