@@ -1,6 +1,5 @@
 /* ==================== */
 /* BASE STYLES */
-/* Foundation: Reset, Variables, Typography, Animations, Preloader */
 /* ==================== */
 
 /* Reset & Base Styles */
@@ -12,8 +11,8 @@
 
 :root {
     /* Light Mode Colors */
-    --primary-color: #5B21B6;
-    --primary-hover: #7C3AED;
+    --primary-color: hsl(271, 78%, 64%);
+    --primary-hover: hsl(229, 60%, 39%);
     --text-primary: #000000;
     --text-secondary: #374151;
     --text-tertiary: #6B7280;

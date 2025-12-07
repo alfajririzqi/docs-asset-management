@@ -265,14 +265,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #000000;
-    color: white;
-    border-radius: 8px;
     font-size: 1.25rem;
+    color: #000000;
 }
 
 [data-theme="dark"] .info-card-icon {
-    background: rgba(139, 92, 246, 0.7);
+    color: rgba(139, 92, 246, 1);
 }
 
 .info-card-content h4 {

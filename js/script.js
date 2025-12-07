@@ -148,8 +148,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Load documentation section
         loadDocContent(section);
         
-        // Update URL hash
-        window.location.hash = section;
+        // Update URL hash (empty for homepage)
+        if (section === 'home') {
+            history.pushState(null, null, window.location.pathname);
+        } else {
+            window.location.hash = section;
+        }
         
         // Update active nav link
         updateActiveNavLink(section);
@@ -157,9 +161,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
         
-        // Close mobile sidebar if open
+        // Close mobile sidebar if open and reset hamburger
         if (sidebar && sidebar.classList.contains('active')) {
             sidebar.classList.remove('active');
+            if (sidebarToggle) {
+                sidebarToggle.checked = false;
+            }
         }
         
         currentSection = section;
@@ -219,7 +226,16 @@ document.addEventListener('DOMContentLoaded', function() {
     function generateTOC(sectionId) {
         if (!tocNav) return;
         
+        // Show TOC on all pages including homepage
+        const tocContainer = document.querySelector('.toc');
+        if (tocContainer) tocContainer.style.display = 'block';
+        
         tocNav.innerHTML = '';
+        
+        // Keep TOC empty on homepage
+        if (sectionId === 'home') {
+            return;
+        }
         
         // Get all h2 and h3 in the current section
         const section = mainContent.querySelector('.doc-section');
@@ -263,8 +279,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (hash && hash !== '') {
             navigateTo(hash);
         } else {
-            // Default to introduction (no homepage)
-            navigateTo('introduction');
+            // Default to homepage
+            navigateTo('home');
         }
     }
 
