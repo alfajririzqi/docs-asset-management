@@ -252,6 +252,91 @@
             <p>See the latest feature releases, product improvements and bug fixes.</p>
         </div>
 
+        <!-- Version 1.2.2 -->
+        <div class="changelog-timeline">
+            <div class="changelog-date">December 8, 2025</div>
+            <div>
+                <div class="changelog-item">
+                    <div class="changelog-version">
+                        <h2>Version 1.2.2</h2>
+                        <span class="version-badge">Latest</span>
+                    </div>
+                    <div class="changelog-tags">
+                        <span class="changelog-tag tag-feature">Added</span>
+                        <span class="changelog-tag tag-change">Changed</span>
+                        <span class="changelog-tag tag-fix">Fixed</span>
+                    </div>
+            
+            <div class="changelog-focus">
+                <strong>🎯 Focus:</strong> UDIM Detection & Blender Version Support - Critical bug fix for UDIM texture detection in cleanup operations, plus expanded Blender version compatibility.
+            </div>
+            
+            <div class="changelog-content">
+                <h3>✨ Added</h3>
+                <ul>
+                    <li><strong>Blender Version Support:</strong>
+                        <ul>
+                            <li>Extended compatibility - Now supports Blender 3.6 to 4.5 (was 4.0+)</li>
+                            <li>Updated bl_info - Minimum version now 3.6.0</li>
+                            <li>Documentation updated - All docs reflect new version range (3.6-4.5)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>🔧 Changed</h3>
+                <ul>
+                    <li><strong>Cleanup Unused Textures - Enhanced Detection:</strong>
+                        <ul>
+                            <li>Shader node scanning - Now scans material shader nodes directly for texture references</li>
+                            <li>Dual-source detection - Checks both material nodes AND bpy.data.images</li>
+                            <li>UDIM-aware - Properly detects UDIM textures that aren't loaded in bpy.data.images</li>
+                            <li>Recursive folder scan - Uses os.walk() to scan all subfolders (was glob root-only)</li>
+                        </ul>
+                    </li>
+                    <li><strong>UDIM Normalization - Universal Separator Support:</strong>
+                        <ul>
+                            <li>Pattern updated - Matches ANY separator (., _, -, etc)</li>
+                            <li>Range validation - Only normalizes tiles in standard UDIM range (1001-1100)</li>
+                            <li>Consistency - Applied to 3 operators: cleanup, publish (2 locations)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>🐛 Fixed</h3>
+                <ul>
+                    <li><strong>CRITICAL: UDIM Texture False Positives:</strong>
+                        <ul>
+                            <li>Root cause: UDIM textures referenced in materials were NOT in bpy.data.images</li>
+                            <li>Old behavior: <code>armor_BaseColor.1001.png</code> → Marked as UNUSED ❌ (WRONG)</li>
+                            <li>New behavior: <code>armor_BaseColor.1001.png</code> → Marked as USED ✅ (CORRECT)</li>
+                            <li>Solution: Scan material shader nodes for TEX_IMAGE nodes before checking bpy.data.images</li>
+                        </ul>
+                    </li>
+                    <li><strong>UDIM Pattern Matching:</strong>
+                        <ul>
+                            <li>Fixed separator detection - Now matches <code>.1001</code>, <code>_1001</code>, <code>-1001</code> patterns</li>
+                            <li>Old regex: Only matched underscore separator</li>
+                            <li>New regex: Matches word boundaries (any separator)</li>
+                            <li>Examples: <code>chair_basecolor.1001.png</code> → <code>chair_basecolor.&lt;UDIM&gt;.png</code> ✅</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>🔍 Testing Notes</h3>
+                <ul>
+                    <li>✅ UDIM textures with dot separator (.1001)</li>
+                    <li>✅ UDIM textures with underscore separator (_1001)</li>
+                    <li>✅ UDIM textures in material nodes (not in bpy.data.images)</li>
+                    <li>✅ Nested subfolder scanning (textures/armor/file.png)</li>
+                    <li>✅ External library textures ignored (library filter)</li>
+                    <li>✅ Non-UDIM textures unchanged</li>
+                    <li>✅ Range validation (2024 not treated as UDIM)</li>
+                </ul>
+            </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Version 1.2.1 -->
         <div class="changelog-timeline">
             <div class="changelog-date">November 23, 2025</div>
@@ -259,7 +344,7 @@
                 <div class="changelog-item">
                     <div class="changelog-version">
                         <h2>Version 1.2.1</h2>
-                        <span class="version-badge">Latest</span>
+                        <span class="version-badge">Stable</span>
                     </div>
                     <div class="changelog-tags">
                         <span class="changelog-tag tag-feature">Added</span>
